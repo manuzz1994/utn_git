@@ -17,7 +17,8 @@ class Personaje:
         print("-Vida:", self.vida)
         print("-Arma:", self.arma)
 #ACCIONES
-    def subir
+    def subir_nivel(self):
+        pass
 
 
 manu = Personaje()

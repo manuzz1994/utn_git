@@ -67,5 +67,10 @@ class Moto(Vehiculo):
 mi_auto = Auto("Fiat", "147 Vivace", 1994, "Manuel Brambilla", "RNA 123", False, "3")
 mi_auto.especificaciones()
 
+mi_auto = Auto("Fiat", "147 Vivace", 1994, "RORO Lopez", "RNA 123", True, "3") #Cambio a TRUE el atributo VENDIDO
+mi_auto.especificaciones()
+
+
+
 mi_moto = Moto("Honda", "Wave", 2020, "Manuel Brambilla", "AA RNA 123", False, 125)
 mi_moto.especificaciones()

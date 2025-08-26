@@ -1,4 +1,7 @@
 """
+Alumno: Cristian Manuel Brambilla
+1er año TUP
+
 Este programa implementa un sistema básico de gestión de vehículos.
 
 En primer lugar, se define la clase principal Vehiculo, que representa un objeto genérico con atributos comunes como marca, modelo, año, titular, patente y estado de venta (vendido).
@@ -26,10 +29,8 @@ class Vehiculo:
     # Métodos para mover vehículo
     def encender(self):
         print(f"{self.marca} {self.modelo} está encendido y listo para moverse...")
-
     def apagar(self):
         print(f"Se apagó {self.marca} {self.modelo}")
-
     def andar(self):
         print(f"{self.marca} {self.modelo} está andando")
 
@@ -53,7 +54,6 @@ class Vehiculo:
             print(f"Ahora el vehículo pertenece a: {self.__titular}")
         else:
             print(f"El vehículo todavía pertenece a: {self.__titular}")
-
 
 # Heredamos "Vehículo" y lo convertimos en AUTO
 class Auto(Vehiculo):
@@ -111,8 +111,8 @@ mi_auto.encender()
 mi_auto.andar()
 mi_auto.apagar()
 
-# mi_moto = Moto("Honda", "Wave", 2020, "Manuel Brambilla", "AA RNA 123", False, 125)
-# mi_moto.especificaciones()
-# mi_moto.encender()
-# mi_moto.andar()
-# mi_moto.apagar()
+#mi_moto = Moto("Honda", "Wave", 2020, "Manuel Brambilla", "AA RNA 123", False, 125)
+#mi_moto.especificaciones()
+#mi_moto.encender()
+#mi_moto.andar()
+#mi_moto.apagar()

@@ -36,8 +36,9 @@ class Ventana(QWidget):
         titulo = QLabel("Formulario de Registro")
         titulo.setAlignment(Qt.AlignCenter)
         titulo.setStyleSheet("font-size: 20px; font-weight: bold;")
-        layout_principal.addWidget(titulo)  # Ocupa dos columnas
-
+        layout_principal.addWidget(titulo)  
+        
+        #QSpacerItem crea un "espacio flexible", es un espaciador que fija el título arriba de la ventana.
         layout_principal.addSpacerItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
         #Grid Layout
@@ -53,10 +54,10 @@ class Ventana(QWidget):
         grid.addWidget(self.input, 0, 2)
 
         layout_principal.addLayout(grid)
-        # addSpacerItem para separar
+
+        # El segundo QSpacerItem o espaciador “rellena” el espacio sobrante al final para que todo se vea equilibrado. 
         layout_principal.addSpacerItem(QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding))
 
-        # layout.addWidget(...)
 
 # -----------------------------------------------------------------------------
 # Ejercicio 2: Más campos de texto
@@ -75,7 +76,7 @@ class Ventana(QWidget):
 
         password_label = QLabel("Contraseña:")
         self.password_input = QLineEdit()
-        self.password_input.setEchoMode(QLineEdit.Password)
+        self.password_input.setEchoMode(QLineEdit.Password) #Oculta contrasena
         grid.addWidget(password_label, 2, 1)
         grid.addWidget(self.password_input, 2, 2)
 
@@ -98,7 +99,8 @@ class Ventana(QWidget):
         genero_group.addButton(self.masc_radio)
         genero_group.addButton(self.fem_radio)
 
-        genero_layout = QHBoxLayout()
+        #esta línea crea un box layout horizontal en que el que se agrupan los botones y quedan mas juntos entre sí.
+        genero_layout = QHBoxLayout() 
         genero_layout.addWidget(self.masc_radio)
         genero_layout.addWidget(self.fem_radio)
 

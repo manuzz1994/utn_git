@@ -1,0 +1,29 @@
+.nvb {
+    height: 200px;
+    background-color: rgb(124, 52, 124);
+}
+
+.cuerpo {
+    height: 400px;
+}
+
+.left {
+    float: left;
+    background-color: red;
+    height: 100%;
+    width: 50%;
+}
+
+.right {
+    float: right;
+    background-color: white;
+    
+    height: 100%;
+    width: 50%;
+}
+
+.ftr {
+    clear: both;
+    height: 100px;
+    background-color: orange;
+}

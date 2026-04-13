@@ -1,0 +1,1417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Práctico Maquetación · HTML5 & CSS3 Flexbox · 6°A — 602</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --surface: #161616;
+      --card: #1e1e1e;
+      --border: #2e2e2e;
+      --accent: #f0e040;
+      --accent2: #40e0ff;
+      --accent3: #ff6b6b;
+      --accent4: #7cffa4;
+      --accent5: #ff9f40;
+      --text: #f0ede8;
+      --muted: #888;
+      --code-bg: #0a0a0a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--surface);
+      border-bottom: 2px solid var(--accent);
+      padding: 2.5rem 3rem;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    .header-badge {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      background: var(--accent);
+      color: #000;
+      padding: 0.3rem 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      border-radius: 2px;
+      margin-bottom: 0.8rem;
+      display: inline-block;
+    }
+    header h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+    header h1 span { color: var(--accent); }
+    .header-meta {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 0.8rem;
+      line-height: 1.9;
+    }
+    .header-right {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .curso-chip {
+      font-family: 'Syne', sans-serif;
+      font-size: 4rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+      opacity: 0.15;
+      letter-spacing: -0.05em;
+    }
+
+    /* ── INTRO STRIP ── */
+    .intro-strip {
+      background: var(--accent);
+      color: #000;
+      padding: 1rem 3rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8rem;
+      display: flex;
+      gap: 3rem;
+      overflow: hidden;
+    }
+    .intro-strip strong { font-weight: 700; }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 3rem 2rem 5rem;
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      border-left: 3px solid var(--accent);
+      padding-left: 0.8rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ── THEORY BOX ── */
+    .theory-box {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent2);
+      border-radius: 6px;
+      padding: 1.8rem 2rem;
+      margin: 1.5rem 0 2rem;
+    }
+    .theory-box h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--accent2);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .theory-box h3::before {
+      content: '📚';
+      font-size: 1rem;
+    }
+    .theory-box p { color: #bbb; font-size: 0.92rem; margin-bottom: 0.8rem; }
+    .theory-box p:last-child { margin-bottom: 0; }
+    .theory-box strong { color: var(--accent2); }
+
+    .prop-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+      margin-top: 1rem;
+    }
+    .prop-table th {
+      font-family: 'Space Mono', monospace;
+      background: #111;
+      color: var(--accent2);
+      padding: 0.6rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .prop-table td {
+      padding: 0.55rem 1rem;
+      border-bottom: 1px solid #1a1a1a;
+      color: #ccc;
+      vertical-align: top;
+    }
+    .prop-table tr:last-child td { border-bottom: none; }
+    .prop-table code {
+      font-family: 'Space Mono', monospace;
+      background: #1a1a1a;
+      color: var(--accent);
+      padding: 0.1rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.75rem;
+    }
+
+    /* ── EXERCISE CARD ── */
+    .exercise {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      margin-bottom: 3.5rem;
+      overflow: hidden;
+    }
+    .exercise-header {
+      padding: 1.6rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .ex-number {
+      font-family: 'Syne', sans-serif;
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+      opacity: 0.12;
+      flex-shrink: 0;
+      width: 60px;
+    }
+    .ex-title-block h2 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.2rem;
+    }
+    .ex-title-block .difficulty {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+    .difficulty-dots {
+      display: inline-flex;
+      gap: 4px;
+      margin-left: 0.5rem;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--border);
+    }
+    .dot.filled { background: var(--accent); }
+
+    .exercise-body { padding: 2rem; }
+
+    /* ── ENUNCIADO ── */
+    .enunciado {
+      background: #111;
+      border-left: 4px solid var(--accent);
+      padding: 1.2rem 1.5rem;
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+    .enunciado h4 {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 0.6rem;
+    }
+    .enunciado ul {
+      padding-left: 1.4rem;
+      margin-top: 0.5rem;
+    }
+    .enunciado li { margin-bottom: 0.3rem; color: #ccc; font-size: 0.9rem; }
+    .enunciado li strong { color: var(--text); }
+
+    /* ── CODE BLOCK ── */
+    .code-block {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      margin: 1.2rem 0;
+    }
+    .code-header {
+      background: #111;
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .code-dots { display: flex; gap: 6px; }
+    .code-dot {
+      width: 11px; height: 11px; border-radius: 50%;
+    }
+    .code-dot:nth-child(1) { background: #ff5f57; }
+    .code-dot:nth-child(2) { background: #febc2e; }
+    .code-dot:nth-child(3) { background: #28c840; }
+    .code-lang {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .code-block pre {
+      padding: 1.4rem 1.5rem;
+      overflow-x: auto;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.78rem;
+      line-height: 1.8;
+      color: #d4d4d4;
+    }
+    .c-kw   { color: #c792ea; }
+    .c-prop { color: #80cbc4; }
+    .c-val  { color: #f78c6c; }
+    .c-str  { color: #c3e88d; }
+    .c-tag  { color: #f07178; }
+    .c-attr { color: #ffcb6b; }
+    .c-num  { color: #f78c6c; }
+    .c-cm   { color: #546e7a; font-style: italic; }
+
+    /* ── PREVIEW ── */
+    .preview-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--muted);
+      margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .preview-label::before {
+      content: '';
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #28c840;
+    }
+
+    /* ── PREVIEW FRAMES ── */
+    .preview-frame {
+      background: #fff;
+      border: 2px solid var(--border);
+      border-radius: 6px;
+      overflow: hidden;
+      min-height: 160px;
+    }
+
+    /* EJ 1 */
+    .preview-1 {
+      display: flex;
+      padding: 20px;
+      gap: 12px;
+      background: #f5f5f5;
+    }
+    .preview-1 .box {
+      width: 80px; height: 80px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .preview-1 .b1 { background: #e63946; }
+    .preview-1 .b2 { background: #457b9d; }
+    .preview-1 .b3 { background: #2a9d8f; }
+
+    /* EJ 2 */
+    .preview-2 {
+      background: #1a1a2e;
+      padding: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 180px;
+    }
+    .preview-2 .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 500px;
+      background: #16213e;
+      padding: 14px 22px;
+      border-radius: 8px;
+    }
+    .preview-2 .logo-p {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      color: #f0e040;
+      font-size: 1.1rem;
+      letter-spacing: -0.02em;
+    }
+    .preview-2 .nav-links {
+      display: flex;
+      gap: 18px;
+    }
+    .preview-2 .nav-links span {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      color: #aaa;
+    }
+    .preview-2 .nav-btn {
+      background: #f0e040;
+      color: #000;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* EJ 3 */
+    .preview-3 {
+      background: #fafafa;
+      padding: 20px;
+      display: flex;
+      gap: 14px;
+    }
+    .preview-3 .card-p {
+      flex: 1;
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .preview-3 .card-img {
+      height: 60px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+    }
+    .preview-3 .card-img.c2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
+    .preview-3 .card-img.c3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+    .preview-3 .card-title-p {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #222;
+    }
+    .preview-3 .card-text-p {
+      font-size: 0.65rem;
+      color: #888;
+      line-height: 1.4;
+    }
+    .preview-3 .card-tag {
+      align-self: flex-start;
+      background: #f0e040;
+      color: #000;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 99px;
+    }
+
+    /* EJ 4 */
+    .preview-4 {
+      background: #0f172a;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .preview-4 .hero-p {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 80px;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      border: 1px solid #334155;
+      border-radius: 6px;
+    }
+    .preview-4 .hero-text {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: #f0e040;
+      text-align: center;
+    }
+    .preview-4 .features {
+      display: flex;
+      gap: 10px;
+    }
+    .preview-4 .feat {
+      flex: 1;
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 6px;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .preview-4 .feat-icon { font-size: 1.2rem; }
+    .preview-4 .feat-name {
+      font-size: 0.65rem;
+      color: #94a3b8;
+      font-family: 'Space Mono', monospace;
+    }
+    .preview-4 .footer-p {
+      background: #0a0f1e;
+      border: 1px solid #1e293b;
+      border-radius: 6px;
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .preview-4 .footer-p span {
+      font-size: 0.65rem;
+      color: #475569;
+      font-family: 'Space Mono', monospace;
+    }
+
+    /* EJ 5 */
+    .preview-5 {
+      background: #fff;
+      display: flex;
+      min-height: 220px;
+    }
+    .preview-5 .sidebar-p {
+      width: 120px;
+      background: #1a1a2e;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .preview-5 .sidebar-logo {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      color: #f0e040;
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #2e2e4e;
+    }
+    .preview-5 .sidebar-link {
+      font-size: 0.65rem;
+      color: #aaa;
+      padding: 5px 8px;
+      border-radius: 4px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .preview-5 .sidebar-link.active {
+      background: #f0e040;
+      color: #000;
+      font-weight: 600;
+    }
+    .preview-5 .content-area {
+      flex: 1;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .preview-5 .content-header {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: #222;
+      border-bottom: 2px solid #f0e040;
+      padding-bottom: 6px;
+    }
+    .preview-5 .grid-p {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .preview-5 .grid-item {
+      width: calc(50% - 4px);
+      height: 40px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #667eea22, #764ba222);
+      border: 1px solid #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.6rem;
+      color: #888;
+      font-family: 'Space Mono', monospace;
+    }
+
+    /* ── TIPS ── */
+    .tip-box {
+      background: #1a1500;
+      border: 1px solid #3d3000;
+      border-left: 4px solid var(--accent);
+      border-radius: 0 6px 6px 0;
+      padding: 1rem 1.4rem;
+      margin-top: 1.2rem;
+    }
+    .tip-box h5 {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+    .tip-box p { font-size: 0.85rem; color: #c0b060; }
+
+    /* ── OBJECTIVES ── */
+    .objectives {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .obj-chip {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.65rem;
+      background: #1e2e1e;
+      border: 1px solid #2e4e2e;
+      color: var(--accent4);
+      padding: 0.3rem 0.8rem;
+      border-radius: 99px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* ── DIVIDER ── */
+    .ex-divider {
+      height: 1px;
+      background: linear-gradient(to right, var(--accent), transparent);
+      margin: 1.5rem 0;
+      opacity: 0.3;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    footer .f-left {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    footer .f-right {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--accent);
+      opacity: 0.3;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════ HEADER ═══════════════ -->
+<header>
+  <div>
+    <span class="header-badge">Práctico de Maquetación</span>
+    <h1>HTML5 &amp; CSS3<br><span>Flexbox</span></h1>
+    <div class="header-meta">
+      Curso: 6°A &nbsp;·&nbsp; División: 602 &nbsp;·&nbsp; Módulo: Diseño Web<br>
+      Tema: Maquetación con Flexbox &nbsp;·&nbsp; 5 Ejercicios incrementales
+    </div>
+  </div>
+  <div class="header-right">
+    <div class="curso-chip">6A</div>
+  </div>
+</header>
+
+<div class="intro-strip">
+  <span><strong>OBJETIVO:</strong> Dominar Flexbox para maquetar interfaces web responsivas</span>
+  <span><strong>HERRAMIENTAS:</strong> VS Code · Chrome DevTools</span>
+  <span><strong>ARCHIVOS:</strong> index.html + styles.css por ejercicio</span>
+</div>
+
+<!-- ═══════════════ MAIN ═══════════════ -->
+<main>
+
+  <!-- ─────── INTRO THEORY ─────── -->
+  <div class="section-label">Introducción Teórica</div>
+
+  <div class="theory-box">
+    <h3>¿Qué es Flexbox?</h3>
+    <p><strong>Flexbox</strong> (Flexible Box Layout) es un modelo de diseño unidimensional de CSS3 que permite distribuir el espacio entre los elementos de una interfaz y mejorar las capacidades de alineación. Con Flexbox, podemos organizar elementos en filas o columnas de manera eficiente.</p>
+    <p>Para activar Flexbox en un contenedor, usamos la propiedad <strong><code>display: flex</code></strong>. A partir de ahí, el contenedor se convierte en un <em>flex container</em> y sus hijos directos pasan a ser <em>flex items</em>.</p>
+    <table class="prop-table">
+      <thead>
+        <tr><th>Propiedad (Contenedor)</th><th>Valores principales</th><th>Descripción</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>display</code></td><td><code>flex</code> / <code>inline-flex</code></td><td>Activa el contexto Flexbox</td></tr>
+        <tr><td><code>flex-direction</code></td><td><code>row</code> / <code>column</code> / <code>row-reverse</code></td><td>Define el eje principal</td></tr>
+        <tr><td><code>justify-content</code></td><td><code>flex-start</code> / <code>center</code> / <code>space-between</code> / <code>space-around</code> / <code>flex-end</code></td><td>Alineación en el eje principal</td></tr>
+        <tr><td><code>align-items</code></td><td><code>stretch</code> / <code>center</code> / <code>flex-start</code> / <code>flex-end</code></td><td>Alineación en el eje cruzado</td></tr>
+        <tr><td><code>flex-wrap</code></td><td><code>nowrap</code> / <code>wrap</code> / <code>wrap-reverse</code></td><td>Permite que los items pasen a la siguiente línea</td></tr>
+        <tr><td><code>gap</code></td><td><code>px</code> / <code>rem</code> / <code>%</code></td><td>Espacio entre flex items</td></tr>
+      </tbody>
+    </table>
+    <table class="prop-table" style="margin-top:0.8rem">
+      <thead>
+        <tr><th>Propiedad (Item)</th><th>Valores principales</th><th>Descripción</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><code>flex-grow</code></td><td>número (0, 1, 2…)</td><td>Cuánto puede crecer el item</td></tr>
+        <tr><td><code>flex-shrink</code></td><td>número (0, 1…)</td><td>Cuánto puede encogerse</td></tr>
+        <tr><td><code>flex-basis</code></td><td><code>auto</code> / <code>px</code> / <code>%</code></td><td>Tamaño base del item</td></tr>
+        <tr><td><code>flex</code></td><td>shorthand: <code>grow shrink basis</code></td><td>Las tres propiedades juntas</td></tr>
+        <tr><td><code>align-self</code></td><td><code>auto</code> / <code>center</code> / <code>flex-end</code></td><td>Alineación individual del item</td></tr>
+        <tr><td><code>order</code></td><td>número entero</td><td>Cambia el orden visual del item</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       EJERCICIO 1
+  ═══════════════════════════════════════ -->
+  <div class="exercise" style="border-top: 3px solid #f0e040;">
+    <div class="exercise-header">
+      <div class="ex-number" style="color:#f0e040">01</div>
+      <div class="ex-title-block">
+        <h2>Cajas en línea — Primeros pasos con Flexbox</h2>
+        <div class="difficulty">
+          Dificultad: Básico
+          <span class="difficulty-dots">
+            <span class="dot filled"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise-body">
+      <div class="section-label">Teoría del Ejercicio</div>
+      <div class="theory-box">
+        <h3>display: flex — Activando el contenedor</h3>
+        <p>Al agregar <strong>display: flex</strong> a un elemento padre, todos sus hijos directos se convierten en <em>flex items</em> y se organizan en fila por defecto (<strong>flex-direction: row</strong>).</p>
+        <p>La propiedad <strong>gap</strong> establece el espacio entre cada item sin necesidad de usar márgenes. Es la forma moderna y limpia de separar elementos.</p>
+        <p>Con <strong>justify-content</strong> controlamos cómo se distribuyen los items a lo largo del eje principal (horizontal en row). Con <strong>align-items</strong> controlamos el eje cruzado (vertical).</p>
+      </div>
+
+      <div class="enunciado">
+        <h4>📋 Enunciado</h4>
+        <p>Creá una página con un contenedor que tenga <strong>3 cajas de colores</strong> alineadas horizontalmente. Cada caja debe tener un tamaño fijo y mostrar su número en el centro.</p>
+        <ul>
+          <li><strong>Paso 1:</strong> Crear el HTML con un div contenedor y 3 divs hijos (.caja)</li>
+          <li><strong>Paso 2:</strong> Aplicar <code>display: flex</code> al contenedor</li>
+          <li><strong>Paso 3:</strong> Agregar <code>gap: 20px</code> para separar las cajas</li>
+          <li><strong>Paso 4:</strong> Centrar las cajas en la pantalla con <code>justify-content: center</code></li>
+          <li><strong>Paso 5:</strong> Centrar el texto dentro de cada caja con Flexbox también</li>
+        </ul>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><div class="code-dot"></div><div class="code-dot"></div><div class="code-dot"></div></div>
+          <span class="code-lang">index.html</span>
+        </div>
+        <pre><span class="c-cm">&lt;!-- Estructura HTML --&gt;</span>
+<span class="c-tag">&lt;body&gt;</span>
+  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"contenedor"</span><span class="c-tag">&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"caja caja-1"</span><span class="c-tag">&gt;</span>1<span class="c-tag">&lt;/div&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"caja caja-2"</span><span class="c-tag">&gt;</span>2<span class="c-tag">&lt;/div&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"caja caja-3"</span><span class="c-tag">&gt;</span>3<span class="c-tag">&lt;/div&gt;</span>
+  <span class="c-tag">&lt;/div&gt;</span>
+<span class="c-tag">&lt;/body&gt;</span></pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><div class="code-dot"></div><div class="code-dot"></div><div class="code-dot"></div></div>
+          <span class="code-lang">styles.css</span>
+        </div>
+        <pre><span class="c-cm">/* === CONTENEDOR FLEX === */</span>
+<span class="c-kw">.contenedor</span> {
+  <span class="c-prop">display</span>: <span class="c-val">flex</span>;
+  <span class="c-prop">justify-content</span>: <span class="c-val">center</span>;
+  <span class="c-prop">align-items</span>: <span class="c-val">center</span>;
+  <span class="c-prop">gap</span>: <span class="c-num">20px</span>;
+  <span class="c-prop">min-height</span>: <span class="c-num">100vh</span>;
+  <span class="c-prop">background-color</span>: <span class="c-str">#f5f5f5</span>;
+}
+
+<span class="c-cm">/* === CADA CAJA === */</span>
+<span class="c-kw">.caja</span> {
+  <span class="c-prop">width</span>: <span class="c-num">100px</span>;
+  <span class="c-prop">height</span>: <span class="c-num">100px</span>;
+  <span class="c-prop">border-radius</span>: <span class="c-num">8px</span>;
+  <span class="c-prop">display</span>: <span class="c-val">flex</span>;          <span class="c-cm">/* Flex también en el item */</span>
+  <span class="c-prop">justify-content</span>: <span class="c-val">center</span>;
+  <span class="c-prop">align-items</span>: <span class="c-val">center</span>;
+  <span class="c-prop">color</span>: <span class="c-str">#fff</span>;
+  <span class="c-prop">font-size</span>: <span class="c-num">1.5rem</span>;
+  <span class="c-prop">font-weight</span>: <span class="c-val">bold</span>;
+}
+
+<span class="c-kw">.caja-1</span> { <span class="c-prop">background-color</span>: <span class="c-str">#e63946</span>; }
+<span class="c-kw">.caja-2</span> { <span class="c-prop">background-color</span>: <span class="c-str">#457b9d</span>; }
+<span class="c-kw">.caja-3</span> { <span class="c-prop">background-color</span>: <span class="c-str">#2a9d8f</span>; }</pre>
+      </div>
+
+      <div class="preview-label">Resultado esperado</div>
+      <div class="preview-frame preview-1">
+        <div class="box b1">1</div>
+        <div class="box b2">2</div>
+        <div class="box b3">3</div>
+      </div>
+
+      <div class="tip-box">
+        <h5>💡 Tip del profe</h5>
+        <p>Abrí las DevTools de Chrome (F12) y en la pestaña <strong>Elements</strong>, hacé clic en el ícono de Flexbox que aparece junto al elemento. Chrome te muestra visualmente los ejes y espacios.</p>
+      </div>
+
+      <div class="objectives">
+        <span class="obj-chip">display: flex</span>
+        <span class="obj-chip">justify-content</span>
+        <span class="obj-chip">align-items</span>
+        <span class="obj-chip">gap</span>
+        <span class="obj-chip">flex anidado</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       EJERCICIO 2
+  ═══════════════════════════════════════ -->
+  <div class="exercise" style="border-top: 3px solid #40e0ff;">
+    <div class="exercise-header">
+      <div class="ex-number" style="color:#40e0ff">02</div>
+      <div class="ex-title-block">
+        <h2>Barra de Navegación — Distribución espacial</h2>
+        <div class="difficulty">
+          Dificultad: Básico-Intermedio
+          <span class="difficulty-dots">
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise-body">
+      <div class="section-label">Teoría del Ejercicio</div>
+      <div class="theory-box" style="border-top-color: var(--accent2);">
+        <h3>space-between y alineación compuesta</h3>
+        <p><strong>justify-content: space-between</strong> es uno de los valores más usados en Flexbox. Coloca el primer item al inicio y el último al final, distribuyendo el espacio sobrante entre los elementos del medio.</p>
+        <p>En una navbar típica queremos el <strong>logo a la izquierda</strong>, los <strong>links en el centro</strong> y un <strong>botón a la derecha</strong>. Con Flexbox y <code>space-between</code> esto se logra sin trucos.</p>
+        <p>Recordá que podés tener <strong>Flexbox dentro de Flexbox</strong> (anidado). Los links de navegación también forman su propio contenedor flex para separarse con <code>gap</code>.</p>
+      </div>
+
+      <div class="enunciado">
+        <h4>📋 Enunciado</h4>
+        <p>Construí una barra de navegación horizontal con: <strong>logo a la izquierda</strong>, <strong>3 links en el centro</strong> y <strong>un botón "Contacto" a la derecha</strong>.</p>
+        <ul>
+          <li><strong>Paso 1:</strong> Estructura HTML con <code>&lt;nav&gt;</code> conteniendo logo, lista de links y botón</li>
+          <li><strong>Paso 2:</strong> Aplicar <code>display: flex</code> y <code>justify-content: space-between</code> al nav</li>
+          <li><strong>Paso 3:</strong> Centrar verticalmente con <code>align-items: center</code></li>
+          <li><strong>Paso 4:</strong> Convertir la lista de links también en flex con <code>gap</code></li>
+          <li><strong>Paso 5:</strong> Estilizar logo, links y botón con colores y tipografía</li>
+        </ul>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><div class="code-dot"></div><div class="code-dot"></div><div class="code-dot"></div></div>
+          <span class="code-lang">index.html</span>
+        </div>
+        <pre><span class="c-tag">&lt;nav</span> <span class="c-attr">class</span>=<span class="c-str">"navbar"</span><span class="c-tag">&gt;</span>
+  <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"logo"</span><span class="c-tag">&gt;</span>MiSitio<span class="c-tag">&lt;/div&gt;</span>
+
+  <span class="c-tag">&lt;ul</span> <span class="c-attr">class</span>=<span class="c-str">"nav-links"</span><span class="c-tag">&gt;</span>
+    <span class="c-tag">&lt;li&gt;&lt;a</span> <span class="c-attr">href</span>=<span class="c-str">"#"</span><span class="c-tag">&gt;</span>Inicio<span class="c-tag">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="c-tag">&lt;li&gt;&lt;a</span> <span class="c-attr">href</span>=<span class="c-str">"#"</span><span class="c-tag">&gt;</span>Nosotros<span class="c-tag">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="c-tag">&lt;li&gt;&lt;a</span> <span class="c-attr">href</span>=<span class="c-str">"#"</span><span class="c-tag">&gt;</span>Servicios<span class="c-tag">&lt;/a&gt;&lt;/li&gt;</span>
+  <span class="c-tag">&lt;/ul&gt;</span>
+
+  <span class="c-tag">&lt;button</span> <span class="c-attr">class</span>=<span class="c-str">"btn-contacto"</span><span class="c-tag">&gt;</span>Contacto<span class="c-tag">&lt;/button&gt;</span>
+<span class="c-tag">&lt;/nav&gt;</span></pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><div class="code-dot"></div><div class="code-dot"></div><div class="code-dot"></div></div>
+          <span class="code-lang">styles.css</span>
+        </div>
+        <pre><span class="c-kw">.navbar</span> {
+  <span class="c-prop">display</span>: <span class="c-val">flex</span>;
+  <span class="c-prop">justify-content</span>: <span class="c-val">space-between</span>; <span class="c-cm">/* ← Clave */</span>
+  <span class="c-prop">align-items</span>: <span class="c-val">center</span>;
+  <span class="c-prop">padding</span>: <span class="c-num">16px 32px</span>;
+  <span class="c-prop">background-color</span>: <span class="c-str">#16213e</span>;
+}
+
+<span class="c-kw">.logo</span> {
+  <span class="c-prop">font-size</span>: <span class="c-num">1.4rem</span>;
+  <span class="c-prop">font-weight</span>: <span class="c-val">bold</span>;
+  <span class="c-prop">color</span>: <span class="c-str">#f0e040</span>;
+}
+
+<span class="c-kw">.nav-links</span> {
+  <span class="c-prop">display</span>: <span class="c-val">flex</span>;   <span class="c-cm">/* Flex anidado */</span>
+  <span class="c-prop">list-style</span>: <span class="c-val">none</span>;
+  <span class="c-prop">gap</span>: <span class="c-num">24px</span>;
+}
+
+<span class="c-kw">.nav-links a</span> {
+  <span class="c-prop">text-decoration</span>: <span class="c-val">none</span>;
+  <span class="c-prop">color</span>: <span class="c-str">#aaa</span>;
+  <span class="c-prop">font-size</span>: <span class="c-num">0.9rem</span>;
+  <span class="c-prop">transition</span>: <span class="c-val">color 0.2s</span>;
+}
+<span class="c-kw">.nav-links a:hover</span> { <span class="c-prop">color</span>: <span class="c-str">#fff</span>; }
+
+<span class="c-kw">.btn-contacto</span> {
+  <span class="c-prop">background</span>: <span class="c-str">#f0e040</span>;
+  <span class="c-prop">color</span>: <span class="c-str">#000</span>;
+  <span class="c-prop">border</span>: <span class="c-val">none</span>;
+  <span class="c-prop">padding</span>: <span class="c-num">8px 18px</span>;
+  <span class="c-prop">border-radius</span>: <span class="c-num">4px</span>;
+  <span class="c-prop">font-weight</span>: <span class="c-val">bold</span>;
+  <span class="c-prop">cursor</span>: <span class="c-val">pointer</span>;
+}</pre>
+      </div>
+
+      <div class="preview-label">Resultado esperado</div>
+      <div class="preview-frame preview-2">
+        <div class="nav">
+          <div class="logo-p">MiSitio</div>
+          <div class="nav-links">
+            <span>Inicio</span>
+            <span>Nosotros</span>
+            <span>Servicios</span>
+          </div>
+          <button class="nav-btn">Contacto</button>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <h5>💡 Tip del profe</h5>
+        <p>Notá que <code>space-between</code> usa el espacio disponible entre los 3 elementos hijo del nav. Si solo hubiera 2 elementos, los pondría uno en cada extremo. ¡Probá agregar más items al nav y observá cómo se distribuyen!</p>
+      </div>
+
+      <div class="objectives">
+        <span class="obj-chip">space-between</span>
+        <span class="obj-chip">flex anidado</span>
+        <span class="obj-chip">align-items: center</span>
+        <span class="obj-chip">semántica HTML5</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       EJERCICIO 3
+  ═══════════════════════════════════════ -->
+  <div class="exercise" style="border-top: 3px solid #ff6b6b;">
+    <div class="exercise-header">
+      <div class="ex-number" style="color:#ff6b6b">03</div>
+      <div class="ex-title-block">
+        <h2>Grilla de Tarjetas — flex-grow y columnas</h2>
+        <div class="difficulty">
+          Dificultad: Intermedio
+          <span class="difficulty-dots">
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise-body">
+      <div class="section-label">Teoría del Ejercicio</div>
+      <div class="theory-box" style="border-top-color: var(--accent3);">
+        <h3>flex-direction: column y flex-grow</h3>
+        <p><strong>flex-direction: column</strong> cambia el eje principal a vertical. Esto es fundamental para armar el interior de una tarjeta donde los elementos se apilan uno sobre otro.</p>
+        <p><strong>flex-grow: 1</strong> en un item le dice a Flexbox "ocupá todo el espacio disponible que sobra". Si dos items tienen <code>flex-grow: 1</code>, el espacio se divide a partes iguales.</p>
+        <p>La propiedad shorthand <strong>flex: 1</strong> equivale a <code>flex-grow: 1; flex-shrink: 1; flex-basis: 0%</code>. Cuando la usamos en los items de una fila, hace que todos ocupen el mismo ancho disponible.</p>
+      </div>
+
+      <div class="enunciado">
+        <h4>📋 Enunciado</h4>
+        <p>Creá una sección de <strong>3 tarjetas de productos</strong> que se distribuyeran en iguales proporciones. Cada tarjeta tiene: imagen (div de color), título, texto y etiqueta.</p>
+        <ul>
+          <li><strong>Paso 1:</strong> Contenedor flex con 3 tarjetas hijas</li>
+          <li><strong>Paso 2:</strong> Usar <code>flex: 1</code> en cada tarjeta para repartir el ancho en partes iguales</li>
+          <li><strong>Paso 3:</strong> Cada tarjeta es también flex con <code>flex-direction: column</code></li>
+          <li><strong>Paso 4:</strong> El texto descriptivo debe empujar la etiqueta hacia abajo usando <code>flex-grow: 1</code> en el párrafo</li>
+          <li><strong>Paso 5:</strong> Agregar <code>gap</code>, bordes redondeados y sombra a las tarjetas</li>
+        </ul>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><div class="code-dot"></div><div class="code-dot"></div><div class="code-dot"></div></div>
+          <span class="code-lang">styles.css</span>
+        </div>
+        <pre><span class="c-kw">.grilla</span> {
+  <span class="c-prop">display</span>: <span class="c-val">flex</span>;
+  <span class="c-prop">gap</span>: <span class="c-num">20px</span>;
+  <span class="c-prop">padding</span>: <span class="c-num">24px</span>;
+  <span class="c-prop">background</span>: <span class="c-str">#fafafa</span>;
+}
+
+<span class="c-kw">.tarjeta</span> {
+  <span class="c-prop">flex</span>: <span class="c-num">1</span>;           <span class="c-cm">/* igual ancho para todas */</span>
+  <span class="c-prop">display</span>: <span class="c-val">flex</span>;
+  <span class="c-prop">flex-direction</span>: <span class="c-val">column</span>; <span class="c-cm">/* apila los hijos */</span>
+  <span class="c-prop">gap</span>: <span class="c-num">12px</span>;
+  <span class="c-prop">background</span>: <span class="c-str">#fff</span>;
+  <span class="c-prop">border-radius</span>: <span class="c-num">12px</span>;
+  <span class="c-prop">padding</span>: <span class="c-num">16px</span>;
+  <span class="c-prop">box-shadow</span>: <span class="c-str">0 2px 12px rgba(0,0,0,0.08)</span>;
+}
+
+<span class="c-kw">.tarjeta-img</span> {
+  <span class="c-prop">height</span>: <span class="c-num">120px</span>;
+  <span class="c-prop">border-radius</span>: <span class="c-num">8px</span>;
+  <span class="c-prop">background</span>: <span class="c-val">linear-gradient</span>(<span class="c-num">135deg</span>, <span class="c-str">#667eea</span>, <span class="c-str">#764ba2</span>);
+}
+
+<span class="c-kw">.tarjeta-titulo</span> {
+  <span class="c-prop">font-weight</span>: <span class="c-val">bold</span>;
+  <span class="c-prop">font-size</span>: <span class="c-num">1rem</span>;
+}
+
+<span class="c-kw">.tarjeta-texto</span> {
+  <span class="c-prop">flex-grow</span>: <span class="c-num">1</span>; <span class="c-cm">/* empuja la etiqueta abajo */</span>
+  <span class="c-prop">color</span>: <span class="c-str">#666</span>;
+  <span class="c-prop">font-size</span>: <span class="c-num">0.85rem</span>;
+}
+
+<span class="c-kw">.tarjeta-etiqueta</span> {
+  <span class="c-prop">align-self</span>: <span class="c-val">flex-start</span>;
+  <span class="c-prop">background</span>: <span class="c-str">#f0e040</span>;
+  <span class="c-prop">color</span>: <span class="c-str">#000</span>;
+  <span class="c-prop">padding</span>: <span class="c-num">4px 12px</span>;
+  <span class="c-prop">border-radius</span>: <span class="c-num">99px</span>;
+  <span class="c-prop">font-size</span>: <span class="c-num">0.75rem</span>;
+  <span class="c-prop">font-weight</span>: <span class="c-val">bold</span>;
+}</pre>
+      </div>
+
+      <div class="preview-label">Resultado esperado</div>
+      <div class="preview-frame preview-3">
+        <div class="card-p">
+          <div class="card-img"></div>
+          <div class="card-title-p">Producto Alpha</div>
+          <div class="card-text-p">Descripción breve del producto con algunos detalles relevantes.</div>
+          <div class="card-tag">Nuevo</div>
+        </div>
+        <div class="card-p">
+          <div class="card-img c2"></div>
+          <div class="card-title-p">Producto Beta</div>
+          <div class="card-text-p">Descripción del segundo producto con información extra.</div>
+          <div class="card-tag">Oferta</div>
+        </div>
+        <div class="card-p">
+          <div class="card-img c3"></div>
+          <div class="card-title-p">Producto Gamma</div>
+          <div class="card-text-p">Tercer producto destacado de la colección actual.</div>
+          <div class="card-tag">Top</div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <h5>💡 Tip del profe</h5>
+        <p>Cambiá el texto de una tarjeta para que sea más largo y observá que la etiqueta siempre queda al fondo gracias al <code>flex-grow: 1</code> del párrafo. ¡Eso es diseño robusto!</p>
+      </div>
+
+      <div class="objectives">
+        <span class="obj-chip">flex: 1</span>
+        <span class="obj-chip">flex-direction: column</span>
+        <span class="obj-chip">flex-grow</span>
+        <span class="obj-chip">align-self</span>
+        <span class="obj-chip">box-shadow</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       EJERCICIO 4
+  ═══════════════════════════════════════ -->
+  <div class="exercise" style="border-top: 3px solid #7cffa4;">
+    <div class="exercise-header">
+      <div class="ex-number" style="color:#7cffa4">04</div>
+      <div class="ex-title-block">
+        <h2>Landing Page Básica — Layout completo con Flexbox</h2>
+        <div class="difficulty">
+          Dificultad: Intermedio-Avanzado
+          <span class="difficulty-dots">
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise-body">
+      <div class="section-label">Teoría del Ejercicio</div>
+      <div class="theory-box" style="border-top-color: var(--accent4);">
+        <h3>flex-wrap y layout de página completa</h3>
+        <p><strong>flex-wrap: wrap</strong> permite que los flex items pasen a una segunda fila cuando no caben en la primera. Esto es esencial para diseños que deben adaptarse a distintos anchos.</p>
+        <p>Para construir una página completa con Flexbox se usa la técnica de <strong>columna principal</strong>: el <code>&lt;body&gt;</code> o wrapper principal se hace <code>flex-direction: column</code> con <code>min-height: 100vh</code>, y el footer se empuja abajo dando al main <code>flex-grow: 1</code>.</p>
+        <p>La propiedad <strong>flex-basis</strong> establece el tamaño base antes de que se apliquen flex-grow y flex-shrink. Combinada con <code>flex-wrap</code>, nos permite definir cuántas columnas queremos: <code>flex-basis: calc(33% - 20px)</code> produce 3 columnas.</p>
+      </div>
+
+      <div class="enunciado">
+        <h4>📋 Enunciado</h4>
+        <p>Armar una <strong>landing page</strong> con estructura completa: hero, sección de features (3 ítems en fila) y footer. Todo con Flexbox.</p>
+        <ul>
+          <li><strong>Paso 1:</strong> Wrapper como flex column para que el footer quede siempre abajo</li>
+          <li><strong>Paso 2:</strong> Sección hero con texto centrado (flex + center en ambos ejes)</li>
+          <li><strong>Paso 3:</strong> Sección features con <code>flex-wrap: wrap</code> y 3 items usando <code>flex-basis</code></li>
+          <li><strong>Paso 4:</strong> Footer con Flexbox y <code>space-between</code></li>
+          <li><strong>Paso 5:</strong> Agregar <code>order</code> para reordenar visualmente uno de los features</li>
+        </ul>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><div class="code-dot"></div><div class="code-dot"></div><div class="code-dot"></div></div>
+          <span class="code-lang">styles.css</span>
+        </div>
+        <pre><span class="c-kw">.wrapper</span> {
+  <span class="c-prop">display</span>: <span class="c-val">flex</span>;
+  <span class="c-prop">flex-direction</span>: <span class="c-val">column</span>;
+  <span class="c-prop">min-height</span>: <span class="c-num">100vh</span>;
+}
+
+<span class="c-kw">.hero</span> {
+  <span class="c-prop">display</span>: <span class="c-val">flex</span>;
+  <span class="c-prop">justify-content</span>: <span class="c-val">center</span>;
+  <span class="c-prop">align-items</span>: <span class="c-val">center</span>;
+  <span class="c-prop">flex-direction</span>: <span class="c-val">column</span>;
+  <span class="c-prop">min-height</span>: <span class="c-num">200px</span>;
+  <span class="c-prop">gap</span>: <span class="c-num">16px</span>;
+  <span class="c-prop">background</span>: <span class="c-str">#0f172a</span>;
+}
+
+<span class="c-kw">.features</span> {
+  <span class="c-prop">display</span>: <span class="c-val">flex</span>;
+  <span class="c-prop">flex-wrap</span>: <span class="c-val">wrap</span>;   <span class="c-cm">/* los items saltan de fila */</span>
+  <span class="c-prop">gap</span>: <span class="c-num">16px</span>;
+  <span class="c-prop">padding</span>: <span class="c-num">24px</span>;
+  <span class="c-prop">flex-grow</span>: <span class="c-num">1</span>;      <span class="c-cm">/* ocupa el espacio entre hero y footer */</span>
+}
+
+<span class="c-kw">.feature-item</span> {
+  <span class="c-prop">flex-basis</span>: <span class="c-val">calc</span>(<span class="c-str">33.33% - 11px</span>); <span class="c-cm">/* 3 cols */</span>
+  <span class="c-prop">display</span>: <span class="c-val">flex</span>;
+  <span class="c-prop">flex-direction</span>: <span class="c-val">column</span>;
+  <span class="c-prop">align-items</span>: <span class="c-val">center</span>;
+  <span class="c-prop">gap</span>: <span class="c-num">8px</span>;
+  <span class="c-prop">padding</span>: <span class="c-num">20px</span>;
+  <span class="c-prop">background</span>: <span class="c-str">#1e293b</span>;
+  <span class="c-prop">border-radius</span>: <span class="c-num">8px</span>;
+}
+
+<span class="c-cm">/* Reordenar visualmente */</span>
+<span class="c-kw">.feature-item:first-child</span> {
+  <span class="c-prop">order</span>: <span class="c-num">2</span>;
+}
+
+<span class="c-kw">.site-footer</span> {
+  <span class="c-prop">display</span>: <span class="c-val">flex</span>;
+  <span class="c-prop">justify-content</span>: <span class="c-val">space-between</span>;
+  <span class="c-prop">padding</span>: <span class="c-num">16px 24px</span>;
+  <span class="c-prop">background</span>: <span class="c-str">#0a0f1e</span>;
+}</pre>
+      </div>
+
+      <div class="preview-label">Resultado esperado</div>
+      <div class="preview-frame preview-4">
+        <div class="hero-p">
+          <div class="hero-text">Bienvenido a MiSitio ✦</div>
+        </div>
+        <div class="features">
+          <div class="feat"><div class="feat-icon">🚀</div><div class="feat-name">Rápido</div></div>
+          <div class="feat"><div class="feat-icon">🔒</div><div class="feat-name">Seguro</div></div>
+          <div class="feat"><div class="feat-icon">📱</div><div class="feat-name">Responsivo</div></div>
+        </div>
+        <div class="footer-p">
+          <span>© 2025 MiSitio</span>
+          <span>Hecho con HTML5 &amp; CSS3</span>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <h5>💡 Tip del profe</h5>
+        <p>La propiedad <code>order</code> solo cambia el orden <em>visual</em>, no el del HTML. Esto es importante para accesibilidad: el lector de pantalla sigue el orden del código, no el visual.</p>
+      </div>
+
+      <div class="objectives">
+        <span class="obj-chip">flex-wrap: wrap</span>
+        <span class="obj-chip">flex-basis</span>
+        <span class="obj-chip">flex-grow: 1</span>
+        <span class="obj-chip">order</span>
+        <span class="obj-chip">layout completo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════
+       EJERCICIO 5
+  ═══════════════════════════════════════ -->
+  <div class="exercise" style="border-top: 3px solid #ff9f40;">
+    <div class="exercise-header">
+      <div class="ex-number" style="color:#ff9f40">05</div>
+      <div class="ex-title-block">
+        <h2>Dashboard con Sidebar — Maestría en Flexbox</h2>
+        <div class="difficulty">
+          Dificultad: Avanzado
+          <span class="difficulty-dots">
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+            <span class="dot filled"></span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="exercise-body">
+      <div class="section-label">Teoría del Ejercicio</div>
+      <div class="theory-box" style="border-top-color: var(--accent5);">
+        <h3>Layouts complejos: sidebar fijo + contenido flexible</h3>
+        <p>El patrón <strong>sidebar + contenido</strong> es uno de los más usados en aplicaciones web. Se logra con un contenedor flex en fila donde el sidebar tiene un ancho fijo (<code>flex-shrink: 0</code>) y el contenido crece (<code>flex: 1</code>).</p>
+        <p><strong>flex-shrink: 0</strong> impide que un item se encoja por más que el espacio sea limitado. Esto asegura que el sidebar siempre mantenga su ancho definido, sin importar cuánto contenido haya al lado.</p>
+        <p>Dentro del área de contenido podemos usar nuevamente <code>flex-wrap: wrap</code> para crear una grilla de tarjetas responsiva. Combinando estos patrones podemos construir interfaces complejas con muy poco código.</p>
+        <table class="prop-table" style="margin-top:1rem">
+          <thead><tr><th>Técnica</th><th>CSS usado</th><th>Resultado</th></tr></thead>
+          <tbody>
+            <tr><td>Sidebar fijo</td><td><code>width: 240px; flex-shrink: 0</code></td><td>No se encoge</td></tr>
+            <tr><td>Contenido adaptable</td><td><code>flex: 1</code></td><td>Ocupa el resto</td></tr>
+            <tr><td>Grilla interna</td><td><code>flex-wrap: wrap + flex-basis</code></td><td>Cols automáticas</td></tr>
+            <tr><td>Sticky footer</td><td><code>flex col + flex-grow en main</code></td><td>Footer abajo siempre</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="enunciado">
+        <h4>📋 Enunciado</h4>
+        <p>Construí un <strong>panel de administración</strong> con barra lateral fija de navegación y área de contenido principal que muestra una grilla de estadísticas.</p>
+        <ul>
+          <li><strong>Paso 1:</strong> Layout raíz flex en fila: sidebar + área principal</li>
+          <li><strong>Paso 2:</strong> Sidebar: <code>width: 240px</code>, <code>flex-shrink: 0</code>, <code>flex-direction: column</code></li>
+          <li><strong>Paso 3:</strong> Área principal: <code>flex: 1</code>, <code>flex-direction: column</code> (header + grilla)</li>
+          <li><strong>Paso 4:</strong> Header del contenido con <code>justify-content: space-between</code></li>
+          <li><strong>Paso 5:</strong> Grilla de tarjetas de estadísticas con <code>flex-wrap: wrap</code> y <code>flex-basis: calc(50% - 8px)</code></li>
+          <li><strong>Desafío extra:</strong> Agregar un ítem de la grilla con <code>flex-basis: 100%</code> para que ocupe todo el ancho</li>
+        </ul>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><div class="code-dot"></div><div class="code-dot"></div><div class="code-dot"></div></div>
+          <span class="code-lang">index.html</span>
+        </div>
+        <pre><span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"dashboard"</span><span class="c-tag">&gt;</span>
+
+  <span class="c-tag">&lt;aside</span> <span class="c-attr">class</span>=<span class="c-str">"sidebar"</span><span class="c-tag">&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"sidebar-logo"</span><span class="c-tag">&gt;</span>Admin<span class="c-tag">&lt;/div&gt;</span>
+    <span class="c-tag">&lt;nav</span> <span class="c-attr">class</span>=<span class="c-str">"sidebar-nav"</span><span class="c-tag">&gt;</span>
+      <span class="c-tag">&lt;a</span> <span class="c-attr">class</span>=<span class="c-str">"nav-item active"</span><span class="c-tag">&gt;</span>Dashboard<span class="c-tag">&lt;/a&gt;</span>
+      <span class="c-tag">&lt;a</span> <span class="c-attr">class</span>=<span class="c-str">"nav-item"</span><span class="c-tag">&gt;</span>Usuarios<span class="c-tag">&lt;/a&gt;</span>
+      <span class="c-tag">&lt;a</span> <span class="c-attr">class</span>=<span class="c-str">"nav-item"</span><span class="c-tag">&gt;</span>Reportes<span class="c-tag">&lt;/a&gt;</span>
+    <span class="c-tag">&lt;/nav&gt;</span>
+  <span class="c-tag">&lt;/aside&gt;</span>
+
+  <span class="c-tag">&lt;main</span> <span class="c-attr">class</span>=<span class="c-str">"contenido"</span><span class="c-tag">&gt;</span>
+    <span class="c-tag">&lt;header</span> <span class="c-attr">class</span>=<span class="c-str">"contenido-header"</span><span class="c-tag">&gt;</span>
+      <span class="c-tag">&lt;h1&gt;</span>Dashboard<span class="c-tag">&lt;/h1&gt;</span>
+      <span class="c-tag">&lt;span&gt;</span>Hoy<span class="c-tag">&lt;/span&gt;</span>
+    <span class="c-tag">&lt;/header&gt;</span>
+    <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"stats-grid"</span><span class="c-tag">&gt;</span>
+      <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"stat-card"</span><span class="c-tag">&gt;</span>...<span class="c-tag">&lt;/div&gt;</span>
+      <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"stat-card"</span><span class="c-tag">&gt;</span>...<span class="c-tag">&lt;/div&gt;</span>
+      <span class="c-tag">&lt;div</span> <span class="c-attr">class</span>=<span class="c-str">"stat-card full"</span><span class="c-tag">&gt;</span>...<span class="c-tag">&lt;/div&gt;</span>
+    <span class="c-tag">&lt;/div&gt;</span>
+  <span class="c-tag">&lt;/main&gt;</span>
+
+<span class="c-tag">&lt;/div&gt;</span></pre>
+      </div>
+
+      <div class="code-block">
+        <div class="code-header">
+          <div class="code-dots"><div class="code-dot"></div><div class="code-dot"></div><div class="code-dot"></div></div>
+          <span class="code-lang">styles.css</span>
+        </div>
+        <pre><span class="c-kw">.dashboard</span> {
+  <span class="c-prop">display</span>: <span class="c-val">flex</span>;
+  <span class="c-prop">min-height</span>: <span class="c-num">100vh</span>;
+}
+
+<span class="c-kw">.sidebar</span> {
+  <span class="c-prop">width</span>: <span class="c-num">240px</span>;
+  <span class="c-prop">flex-shrink</span>: <span class="c-num">0</span>;     <span class="c-cm">/* no se encoge nunca */</span>
+  <span class="c-prop">display</span>: <span class="c-val">flex</span>;
+  <span class="c-prop">flex-direction</span>: <span class="c-val">column</span>;
+  <span class="c-prop">gap</span>: <span class="c-num">8px</span>;
+  <span class="c-prop">padding</span>: <span class="c-num">20px 16px</span>;
+  <span class="c-prop">background</span>: <span class="c-str">#1a1a2e</span>;
+}
+
+<span class="c-kw">.nav-item</span> {
+  <span class="c-prop">padding</span>: <span class="c-num">10px 14px</span>;
+  <span class="c-prop">border-radius</span>: <span class="c-num">6px</span>;
+  <span class="c-prop">color</span>: <span class="c-str">#888</span>;
+  <span class="c-prop">text-decoration</span>: <span class="c-val">none</span>;
+  <span class="c-prop">font-size</span>: <span class="c-num">0.9rem</span>;
+}
+<span class="c-kw">.nav-item.active</span> {
+  <span class="c-prop">background</span>: <span class="c-str">#f0e040</span>;
+  <span class="c-prop">color</span>: <span class="c-str">#000</span>;
+  <span class="c-prop">font-weight</span>: <span class="c-val">bold</span>;
+}
+
+<span class="c-kw">.contenido</span> {
+  <span class="c-prop">flex</span>: <span class="c-num">1</span>;              <span class="c-cm">/* ocupa todo el resto */</span>
+  <span class="c-prop">display</span>: <span class="c-val">flex</span>;
+  <span class="c-prop">flex-direction</span>: <span class="c-val">column</span>;
+  <span class="c-prop">gap</span>: <span class="c-num">20px</span>;
+  <span class="c-prop">padding</span>: <span class="c-num">24px</span>;
+}
+
+<span class="c-kw">.contenido-header</span> {
+  <span class="c-prop">display</span>: <span class="c-val">flex</span>;
+  <span class="c-prop">justify-content</span>: <span class="c-val">space-between</span>;
+  <span class="c-prop">align-items</span>: <span class="c-val">center</span>;
+}
+
+<span class="c-kw">.stats-grid</span> {
+  <span class="c-prop">display</span>: <span class="c-val">flex</span>;
+  <span class="c-prop">flex-wrap</span>: <span class="c-val">wrap</span>;
+  <span class="c-prop">gap</span>: <span class="c-num">16px</span>;
+}
+
+<span class="c-kw">.stat-card</span> {
+  <span class="c-prop">flex-basis</span>: <span class="c-val">calc</span>(<span class="c-str">50% - 8px</span>); <span class="c-cm">/* 2 columnas */</span>
+  <span class="c-prop">padding</span>: <span class="c-num">24px</span>;
+  <span class="c-prop">background</span>: <span class="c-str">#fff</span>;
+  <span class="c-prop">border-radius</span>: <span class="c-num">10px</span>;
+  <span class="c-prop">border</span>: <span class="c-str">1px solid #eee</span>;
+}
+
+<span class="c-cm">/* Desafío extra: item a ancho completo */</span>
+<span class="c-kw">.stat-card.full</span> {
+  <span class="c-prop">flex-basis</span>: <span class="c-num">100%</span>;
+}</pre>
+      </div>
+
+      <div class="preview-label">Resultado esperado</div>
+      <div class="preview-frame preview-5">
+        <div class="sidebar-p">
+          <div class="sidebar-logo">Admin</div>
+          <div class="sidebar-link active">Dashboard</div>
+          <div class="sidebar-link">Usuarios</div>
+          <div class="sidebar-link">Reportes</div>
+          <div class="sidebar-link">Config</div>
+        </div>
+        <div class="content-area">
+          <div class="content-header">Panel de estadísticas</div>
+          <div class="grid-p">
+            <div class="grid-item">Visitas · 4.2k</div>
+            <div class="grid-item">Ventas · $1.8k</div>
+            <div class="grid-item">Usuarios · 312</div>
+            <div class="grid-item">Tasa · 68%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tip-box">
+        <h5>💡 Desafío extra</h5>
+        <p>Agregá una tarjeta con la clase <code>full</code> que tenga <code>flex-basis: 100%</code> para que ocupe toda la fila. Esto simula un gráfico de barras o un resumen extendido, muy común en dashboards reales.</p>
+      </div>
+
+      <div class="objectives">
+        <span class="obj-chip">flex-shrink: 0</span>
+        <span class="obj-chip">sidebar pattern</span>
+        <span class="obj-chip">flex-basis: 100%</span>
+        <span class="obj-chip">layout complejo</span>
+        <span class="obj-chip">aside + main</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- RESUMEN FINAL -->
+  <div class="theory-box" style="border-top-color: var(--accent); margin-top: 1rem;">
+    <h3>📋 Resumen de propiedades aprendidas</h3>
+    <table class="prop-table">
+      <thead>
+        <tr><th>Ejercicio</th><th>Habilidades adquiridas</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>01 — Cajas en línea</td><td><code>display:flex</code>, <code>justify-content</code>, <code>align-items</code>, <code>gap</code>, flex anidado</td></tr>
+        <tr><td>02 — Navbar</td><td><code>space-between</code>, flex anidado en lista, <code>align-items: center</code></td></tr>
+        <tr><td>03 — Tarjetas</td><td><code>flex: 1</code>, <code>flex-direction: column</code>, <code>flex-grow</code>, <code>align-self</code></td></tr>
+        <tr><td>04 — Landing Page</td><td><code>flex-wrap: wrap</code>, <code>flex-basis</code>, <code>order</code>, layout de página</td></tr>
+        <tr><td>05 — Dashboard</td><td><code>flex-shrink: 0</code>, sidebar pattern, layouts complejos</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="f-left">
+    Práctico Maquetación HTML5 &amp; CSS3 · Flexbox<br>
+    Curso 6°A · División 602 · Módulo Diseño Web
+  </div>
+  <div class="f-right">602</div>
+</footer>
+
+</body>
+</html>

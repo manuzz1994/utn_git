@@ -128,7 +128,11 @@
     border-radius: 8px;
 }
 
-/* TODO: @media (min-width: 768px)
-   → .dash-sidebar: display flex (o block)
-   → .dash-body: sigue siendo flex row (ya lo es)
-*/
+@media (min-width: 768px) {
+    .dash-sidebar {
+        display: flex;
+    }
+    .dash-body {
+        flex-direction: row;
+    }
+}

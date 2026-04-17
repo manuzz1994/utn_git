@@ -125,10 +125,10 @@ class SistemaDocentes(QMainWindow):
     def crear_panel_formulario(self):
         """Crear el panel con el formulario de datos"""
         widget = QWidget()
-        layout = QVBoxLayout()
+        layout = QVBoxLayout()     
         
         # COMPLETAR: Crear grupo de formulario
-        grupo_form = QGroupBox("Datos del Docente")
+        grupo_form = QGroupBox("Datos del Docente") 
         form_layout = QGridLayout()
         
         # Crear campos del formulario

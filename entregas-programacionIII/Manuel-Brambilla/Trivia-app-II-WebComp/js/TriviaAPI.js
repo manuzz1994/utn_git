@@ -30,5 +30,5 @@ class TriviaAPI {
   }
 }
 
-// No olvidar exportar si usan módulos:
+// No olvidr exportar si usan módulos:
 // export default TriviaAPI;

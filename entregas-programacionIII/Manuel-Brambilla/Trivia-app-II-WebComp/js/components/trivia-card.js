@@ -3,12 +3,22 @@ class TriviaCard extends HTMLElement {
         super();
         this._shadow = this.attachShadow({ mode: 'open' }); // Crear un shadow DOM para encapsular estilos y estructura
         this._pregunta = null; // Inicializar la propiedad pregunta
+        this._numeroPregunta = 0;
+        this._puntaje = 0;
     }
 
     // setter para la propiedad pregunta, que se usará para actualizar el contenido del componente
     set pregunta(valor) {
         this._pregunta = valor;
         this._render(); // Renderizar el componente cada vez que se actualice la pregunta 
+    }
+
+    set numeroPregunta(valor) {
+        this._numeroPregunta = valor;
+    }
+    
+    set puntaje(valor){
+        this._puntaje = valor;
     }
 
     _render() {
@@ -59,7 +69,10 @@ class TriviaCard extends HTMLElement {
                     opacity: 1;
                 }
             </style>
-
+            <div class="info">
+                <span>Pregunta ${this._numeroPregunta} de 10</span>
+                <span>Puntaje: ${this._puntaje}</span>
+            </div>
             <p class="pregunta">${decodificarHTML(this._pregunta.question)}</p>
             <div class="opciones">
                 ${opciones.map((op) => `
@@ -114,6 +127,8 @@ class TriviaCard extends HTMLElement {
             bubbles: true,
         }));
     }
+
+
 }
 
 customElements.define('trivia-card', TriviaCard);

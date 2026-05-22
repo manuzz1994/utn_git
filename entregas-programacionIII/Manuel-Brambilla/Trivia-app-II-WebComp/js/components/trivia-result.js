@@ -35,6 +35,7 @@ class TriviaResult extends HTMLElement {
     }
 
     _render() {
+        console.log('render result', this._game, this._nombre); // ← temporal
         if (!this._game) return;
         
         const historial = JSON.parse(localStorage.getItem('historial')) || [];

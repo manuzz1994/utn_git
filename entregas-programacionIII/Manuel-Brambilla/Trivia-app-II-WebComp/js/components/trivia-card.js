@@ -29,9 +29,11 @@ class TriviaCard extends HTMLElement {
         ]);
         this._shadow.innerHTML = `
             <style>
+                ${estilosBase()}
                 :host {
                     display: block;
                     padding: 1em;
+                    font-family: var(--font);
                 }
                 .pregunta {
                     font-size: 1.2em;
@@ -69,15 +71,17 @@ class TriviaCard extends HTMLElement {
                     opacity: 1;
                 }
             </style>
-            <div class="info">
+            <div class="card">
+                <div class="info">
                 <span>Pregunta ${this._numeroPregunta} de 10</span>
                 <span>Puntaje: ${this._puntaje}</span>
-            </div>
-            <p class="pregunta">${decodificarHTML(this._pregunta.question)}</p>
-            <div class="opciones">
-                ${opciones.map((op) => `
-                    <button data-respuesta="${op}">${decodificarHTML(op)}</button>
-                `).join('')}
+                </div>
+                <p class="pregunta">${decodificarHTML(this._pregunta.question)}</p>
+                <div class="opciones">
+                    ${opciones.map((op) => `
+                        <button data-respuesta="${op}">${decodificarHTML(op)}</button>
+                    `).join('')}
+                </div>
             </div>
         `;
 

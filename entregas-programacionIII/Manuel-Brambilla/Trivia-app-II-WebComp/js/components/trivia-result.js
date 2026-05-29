@@ -42,10 +42,12 @@ class TriviaResult extends HTMLElement {
 
         this._shadow.innerHTML = `
             <style>
+                ${estilosBase()}
                 :host {
                     display: block;
                     padding: 1em;
                     text-align: center;
+                    font-family: var(--font);
                 }
                 h2 {margin-bottom: 0.5em;}
                 ul {
@@ -59,14 +61,16 @@ class TriviaResult extends HTMLElement {
                     border-bottom: 1px solid #eee;
                 }
             </style>
-            <h2>¡Juego Terminado!</h2>
-            <p>${this._nombre}, tu puntaje es ${this._game.puntaje} de ${this._game.preguntas.length}.</p>
-            <h3>Historial de Puntajes</h3>
-            <ul>
-                ${this._renderHistorial(historial)}
-            </ul>
-            <button id="btn-reiniciar">Juego Nuevo</button>
-        `;
+            <div class="card">
+                <h2>¡Juego Terminado!</h2>
+                <p>${this._nombre} tu puntaje es ${this._game.puntaje} de ${this._game.preguntas.length}.</p>
+                <h3>Historial de Puntajes</h3>
+                <ul>
+                    ${this._renderHistorial(historial)}
+                </ul>
+                <button id="btn-reiniciar">Juego Nuevo</button>
+            </div>
+            `;
 
     this._shadow.getElementById('btn-reiniciar').addEventListener('click', () => {
         this.dispatchEvent(new CustomEvent('reiniciar', { bubbles: true}));

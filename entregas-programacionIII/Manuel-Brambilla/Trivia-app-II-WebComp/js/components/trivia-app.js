@@ -12,9 +12,10 @@ class TriviaApp extends HTMLElement {
     _mostrarInicio() {
         this._shadow.innerHTML = `
             <style>
+                ${estilosBase()}
                 :host {
                     display: block;
-                    font-family: 'Segoe UI', sans-serif;
+                    font-family: var(--font);
                 }
                 input, select, button {
                     padding: 0.5em;
@@ -30,14 +31,7 @@ class TriviaApp extends HTMLElement {
                     cursor: pointer;
                     border: none;
                 }
-                .card{
-                    border: 1px solid #ccc;
-                    border-radius: 10px;
-                    padding: 2em;
-                    max-width: 600px;
-                    width: 100%;
-                    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-                }
+                
             </style>
             <div class="card">
                 <h1>Trivia Game</h1>
@@ -144,14 +138,9 @@ class TriviaApp extends HTMLElement {
     _mostrarError(msg) {
         this._shadow.innerHTML = `
             <style>
-                .card{
-                    border: 1px solid #ccc;
-                    border-radius: 10px;
-                    padding: 2em;
-                    max-width: 600px;
-                    width: 100%;
-                    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-                    align-items: center;
+                ${estilosBase()}
+                :host {
+                    font-family: var(--font);
                 }
                 button {
                     margin-top: 1em;

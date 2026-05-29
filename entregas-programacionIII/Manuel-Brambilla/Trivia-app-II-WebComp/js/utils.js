@@ -11,3 +11,16 @@ function mezclar(array) {
     }
     return array;
 }
+
+function estilosBase() {
+    return `
+        .card {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 2em;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+    `;
+}

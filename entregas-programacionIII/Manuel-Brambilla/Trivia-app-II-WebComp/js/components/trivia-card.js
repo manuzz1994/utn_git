@@ -47,20 +47,20 @@ class TriviaCard extends HTMLElement {
                 button {
                     padding: 0.5em 1em;
                     font-size: 1em;
-                    border: 1px solid #ccc;
+                    border: 1px solid var(--color-border);
                     border-radius: 6px;
                     cursor: pointer;
-                    background-color: #f9f9f9;
+                    background-color: var(--color-surface);
                 }
                 button:hover {
-                    background-color: #f0f0f0;
+                    background-color: var(--color-bg);
                 }
                 button.correct {
-                    background-color: #4caf50;
+                    background-color: var(--color-correct);
                     color: white;
                 }
                 button.incorrect {
-                    background-color: #f44336;
+                    background-color: var(--color-wrong);
                     color: white;
                 }
                 button:disabled {

@@ -14,13 +14,23 @@ function mezclar(array) {
 
 function estilosBase() {
     return `
+        *{
+            box-sizing: border-box;
+        }
         .card {
-            border: 1px solid #ccc;
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
             border-radius: 10px;
             padding: 2em;
             max-width: 500px;
             width: 100%;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        }
+        @media (max-width: 480px) {
+            .card {
+                padding: 1.2em;
+                border-radius: 6px;
+            }
         }
     `;
 }

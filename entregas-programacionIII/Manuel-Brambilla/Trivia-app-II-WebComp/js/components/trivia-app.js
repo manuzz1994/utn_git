@@ -16,17 +16,19 @@ class TriviaApp extends HTMLElement {
                 :host {
                     display: block;
                     font-family: var(--font);
+                    width: 100%;
+                    box-sizing: border-box;
                 }
                 input, select, button {
                     padding: 0.5em;
                     font-size: 1em;
                     margin-top: 0.5em;
                     width: 100%;
-                    border: 1px solid #ccc;
+                    border: 1px solid var(--color-border);
                     border-radius: 6px;
                 }
                 button {
-                    background-color: #333;
+                    background-color: var(--color-accent);
                     color: white;
                     cursor: pointer;
                     border: none;
@@ -141,6 +143,9 @@ class TriviaApp extends HTMLElement {
                 ${estilosBase()}
                 :host {
                     font-family: var(--font);
+                    display: block;
+                    width: 100%;
+                    box-sizing: border-box;
                 }
                 button {
                     margin-top: 1em;
@@ -148,7 +153,7 @@ class TriviaApp extends HTMLElement {
                     cursor: pointer;
                     border-radius: 6px;
                     border: none;
-                    background: #333;
+                    background: var(--color-accent);
                     color: white;
                 }
             </style>

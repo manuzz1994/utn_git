@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web-Component-APIs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Buscador de Libros</h1>
+        <input type="text" id="inputSearch" placeholder="Buscar por título o autor...">
+        <select id="limit">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+        </select>
+        <button id="btnSearch">Buscar</button>
+    </div>
+
+    <div id="results" class="container">
+        <book-card></book-card>
+    </div>
+
+    <div id="pagination">
+        <button id="btnPrev">Anterior</button>
+        <span id="page-info"></span>
+        <button id="btnNext">Siguiente</button>
+    </div>
+
+    
+    <script src="js/components/BookCard.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
